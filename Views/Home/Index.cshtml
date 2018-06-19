@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model TheWall.Models.Users
+
+@{
+    if(@ViewBag.CurrentUser.id == 0)
+    {
+        <div class="jumbotron">
+            <h2>Please Login or Regester to view The Wall!</h2>
+        </div>
+    }
+}
+
+<form action="login" method="POST"><table>
+    <h2>Login</h2>
+    <tr>
+        <td>Email: </td>
+        <td><input name="inEmail" type="email"></input></td>
+    </tr>
+    <tr>
+        <td>Password: </td>
+        <td><input name="inPass" type="password"></input></td>
+    </tr>
+
+    <tr>
+        <td><input type="submit" value="Submit!"></td>
+        <td><span>@ViewBag.LogError</span></td>
+    </tr>
+</table></form>
+
+
+<form action="register" method="POST"><table>
+    <h2>Register</h2>
+    <tr>
+        <td>First Name: </td>
+        <td><input asp-for="first_name"></td>
+        <td><span asp-validation-for="first_name"></span></td>
+    </tr>
+    <tr>
+        <td>Last Name: </td>
+        <td><input asp-for="last_name"></td>
+        <td><span asp-validation-for="last_name"></span></td>
+    </tr>
+    <tr>
+        <td>Email: </td>
+        <td><input asp-for="email"></input></td>
+        <td><span asp-validation-for="email"></span></td>
+    </tr>
+    <tr>
+        <td>Password: </td>
+        <td><input asp-for="password"></input></td>
+        <td><span asp-validation-for="password" type="password"></span></td>
+    </tr>
+    <tr>
+        <td>Confirm Password: </td>
+        <td><input asp-for="password"></input></td>
+        <td><span type="password" asp-validation-for="password"></span></td>
+    </tr>
+    <tr><td><input type="submit" value="Submit!"></td></tr>
+</table></form>

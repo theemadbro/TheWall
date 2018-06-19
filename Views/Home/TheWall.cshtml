@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "The Wall";
+}
+
+@{
+    <h1>Make a new Post!</h1>
+    <form action="newpost" method="POST">
+        <textarea name="postInp" class="form-control input-lg" rows="3"></textarea>
+        <button type="submit" class="simpleMar btn btn-default">Submit Post!</button>
+    </form>
+    <hr />
+    @foreach(var x in @ViewBag.thewall){
+        <div style="word-wrap: break-word">
+            <h1>@x.postContent</h1>
+            <h5>@x.User.first_name @x.User.last_name - @x.created_at</h5>
+            @if(@x.User.id == @ViewBag.CurrentUser.id && (DateTime.Now - @x.created_at).TotalMinutes <= 30)
+                {
+                    <form action="delete/@x.id" method="POST">
+                        <button type="submit" class="simpleMar btn btn-default">Delete Post...</button>
+                    </form>
+                }
+            <ul>
+            @foreach (var y in @x.Comments){
+                <h2>@y.comContent</h2>
+                <h5>@y.User.first_name @y.User.last_name - @y.created_at</h5>
+            }
+            <hr />
+            <h4>Add Commment</h4>
+            <form action="newcomm" method="POST">
+                    <textarea name="commInp" class="form-control input-md" rows="2"></textarea>
+                    <input name="postidinp" type="hidden" value="@x.id">
+                    <button type="submit" class="simpleMar btn btn-default">Submit Comment!</button>
+                </form>
+            </ul>
+            <hr />
+
+        </div>
+        
+    }
+}
